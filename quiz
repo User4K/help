@@ -1,0 +1,41 @@
+const Discord = require('discord.js')
+
+exports.run = (bot, message, args) => {
+
+    message.channel.send('> PERGUNTA 1?').then(msg1 => {
+        let p1 = message.channel.createMessageCollector(x => x.author.id == message.author.id, { time: 60000 * 20, max: 1 })
+            .on('collect', c => {
+                pergunta1 = c.content
+
+
+                message.channel.send('> PERGUNTA 2?').then(msg2 => {
+                    let p2 = message.channel.createMessageCollector(x => x.author.id == message.author.id, { time: 60000 * 20, max: 1 })
+                        .on('collect', c => {
+                            pergunta2 = c.content
+
+                            message.channel.send('> PERGUNTA 3?').then(msg3 => {
+                                let p3 = message.channel.createMessageCollector(x => x.author.id == message.author.id, { time: 60000 * 20, max: 1 })
+                                    .on('collect', c => {
+                                        pergunta3 = c.content
+
+                                        message.channel.send('OK.. TO ANALISANDO SUA PONTUACON')
+                                        let p4 = message.channel.createMessageCollector(x => x.author.id == message.author.id, { time: 60000 * 20, max: 1 })
+                                            .on('collect', c => {
+                                                pergunta4 = c.content
+                                                
+
+                                                let embed = new Discord.MessageEmbed()
+                                                    .setTimestamp()
+                                                    .setTitle(`RESULTADO`)
+                                                    .setColor("#000000")
+                                                    .setDescription("Pontuação: 4 | nota : aprovado")
+                                                message.channel.send(embed)
+                                            })
+                                    })
+
+                            })
+                        })
+                })
+            })
+    })
+}
